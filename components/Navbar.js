@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import avatar from '../temp/avatar.jpeg'
+import { BsPerson } from 'react-icons/bs'
 
 const style = {
   wrapper: `h-16 w-full bg-black text-white flex md:justify-around items-center px-50 fixed z-20`,
@@ -12,6 +13,8 @@ const style = {
   loginButton: `flex items-center cursor-pointer rounded-full hover:bg-[#333333] px-4 py-1`,
   loginText: `ml-2`,
 }
+
+const currentAcccount = "0x0000000000000000000000000000000000000000";
 
 const Navbar = () => {
   return (
@@ -28,7 +31,17 @@ const Navbar = () => {
         <div className={style.userImageContainer}>
           <Image className={style.userImage} src={avatar} width={40} height={40} />
         </div>
-        <div>0x0000...0000</div>
+
+        {currentAcccount ? (
+          <div>
+            {currentAcccount.slice(0, 6)}...{currentAcccount.slice(39)}
+          </div>
+        ) : (
+          <div className={style.loginButton}>
+            <BsPerson />
+            <span className={style.loginText}>please log in</span>
+          </div>
+        )}
       </div>
     </div>
   )
